@@ -1,5 +1,8 @@
 #!/bin/sh
 
+host_str=${HOSTNAME}
+last_digit=${host_str: -1}
+
 DEFAULT_NTP="time.cloudflare.com"
 CHRONY_CONF_FILE="/etc/chrony/chrony.conf"
 
@@ -29,8 +32,15 @@ fi
 # echo $NTP_SERVERS
 # echo $apple
 # NTP_SERVERS environment variable is not present, so populate with default server
+# if [ -z "${NTP_SERVERS}" ]; then
+#   NTP_SERVERS="${DEFAULT_NTP}"
+# fi
 if [ -z "${NTP_SERVERS}" ]; then
-  NTP_SERVERS="${DEFAULT_NTP}"
+  if [ "${last_digit}" = "0" ]; then
+    NTP_SERVERS="127.127.1.1"
+  else
+    NTP_SERVERS="192.168.1${HOSTNAME: -4: -2}.100"
+  fi
 fi
 
 # LOG_LEVEL environment variable is not present, so populate with chrony default (0)
@@ -72,5 +82,14 @@ done
   echo "allow 192.168"
 } >> ${CHRONY_CONF_FILE}
 
+
+
 ## startup chronyd in the foreground
+# -q: sync only once
 exec /usr/sbin/chronyd -u chrony -d -L ${LOG_LEVEL}
+# if [ "${last_digit}" = "0" ];then
+#   exec /usr/sbin/chronyd -u chrony -d -L ${LOG_LEVEL}
+# else
+#   ntpdate ${NTP_SERVERS}
+#   # exec /usr/sbin/chronyd -u chrony -q -d -L ${LOG_LEVEL}
+# fi

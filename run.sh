@@ -5,6 +5,7 @@ source vars
 
 DOCKER=$(which docker)
 
+
 # function to check if container is running
 function check_container() {
   $DOCKER ps --filter "name=${CONTAINER_NAME}" --format "{{.ID}}"
@@ -13,7 +14,7 @@ function check_container() {
 # function to start new docker container
 function start_container() {
   $DOCKER run --name=${CONTAINER_NAME}             \
-              --detach=true                        \
+              --detach=false                        \
               --restart=always                     \
               --publish=123:123/udp                \
               --env=NTP_SERVERS=${NTP_SERVERS}     \
