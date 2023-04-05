@@ -16,5 +16,6 @@ services:
     cap_add:
       - SYS_TIME
     environment:
-      - NTP_SERVERS="${NTP_SERVERS:-time.cloudflare.com}"
+      - NTP_SERVERS=${NTP_SERVERS:-127.127.1.1}
+      - HOSTNAME=${HOSTNAME:-127.127.1.1}
       - LOG_LEVEL=0

@@ -36,7 +36,7 @@ fi
 #   NTP_SERVERS="${DEFAULT_NTP}"
 # fi
 if [ -z "${NTP_SERVERS}" ]; then
-  if [ "${last_digit}" = "0" ]; then
+  if [ "${last_digit}" -eq "0" ]; then
     NTP_SERVERS="127.127.1.1"
   else
     NTP_SERVERS="192.168.1${HOSTNAME: -4: -2}.100"
@@ -83,7 +83,8 @@ done
 } >> ${CHRONY_CONF_FILE}
 
 
-
+echo "HOSTNAME is: ${HOSTNAME}"
+echo "NTP Server is: ${NTP_SERVERS}"
 ## startup chronyd in the foreground
 # -q: sync only once
 exec /usr/sbin/chronyd -u chrony -d -L ${LOG_LEVEL}
