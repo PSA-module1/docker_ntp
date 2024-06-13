@@ -4,7 +4,7 @@
 # of these to be appropriate for your environment.
 #
 
-IMAGE_NAME="cturra/ntp"
+IMAGE_NAME="dokcer-ntp:arm64"
 CONTAINER_NAME="ntp"
 
 # (optional) define ntp server(s) to use

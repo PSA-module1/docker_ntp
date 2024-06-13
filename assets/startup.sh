@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Print current architecture for debugging
+echo "Current architecture: $(uname -m)"
+
 host_str=${HOSTNAME}
 last_digit=${host_str: -1}
 

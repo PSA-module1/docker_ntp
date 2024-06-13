@@ -1,0 +1,23 @@
+version: '3.4'
+
+services:
+  ntp:
+    build:
+      context: .
+      dockerfile: Dockerfile.arm64
+    image: clothooo/docker-ntp:arm64
+    container_name: ntp
+    restart: always
+    ports:
+      - 123:123/udp
+    read_only: true
+    tmpfs:
+      - /etc/chrony:rw,mode=1750
+      - /run/chrony:rw,mode=1750
+      - /var/lib/chrony:rw,mode=1750
+    cap_add:
+      - SYS_TIME
+    environment:
+      - NTP_SERVERS=${NTP_SERVERS:-127.127.1.1}
+      - HOSTNAME=${HOSTNAME:-127.127.1.1}
+      - LOG_LEVEL=0

@@ -3,9 +3,9 @@ FROM arm64v8/alpine:latest
 ARG BUILD_DATE
 
 # first, a bit about this container
-LABEL build_info="tobylyu/docker-ntp build-date:- ${BUILD_DATE}"
+LABEL build_info="clothooo/docker-ntp build-date:- ${BUILD_DATE}"
 # LABEL maintainer="Chris Turra <cturra@gmail.com>"
-LABEL documentation="https://github.com/5G-Sentosa/docker-ntp"
+LABEL documentation="https://github.com/PSA-module1/docker_ntp"
 
 # install chrony
 RUN apk add --no-cache chrony
