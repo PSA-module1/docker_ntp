@@ -18,6 +18,6 @@ services:
     cap_add:
       - SYS_TIME
     environment:
-      - NTP_SERVERS=${NTP_SERVERS:-127.127.1.1}
+      - NTP_SERVERS=${NTP_SERVERS:-10.28.137.60}
       - HOSTNAME=${HOSTNAME:-127.127.1.1}
       - LOG_LEVEL=0
