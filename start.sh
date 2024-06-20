@@ -1,11 +1,8 @@
 #!/bin/bash
 ntp_servers="192.168.1.60"
 
-if [ -z "$1" ]; then
-    echo "Usage: $0 <ntp_servers>"
-else
+if [ -n "$1" ]; then
     ntp_servers=$1
-    echo "NTP_SERVERS: $ntp_servers"
 fi
 
 ARCH=$(uname -m)
@@ -13,13 +10,19 @@ ARCH=$(uname -m)
 if [ "$ARCH" == "x86_64" ]; then
     echo "Detected architecture: x86_64"
     sudo docker load -i docker-images/ntp_x86.tar
-    sudo NTP_SERVERS="$ntp_servers" docker-compose up --force-recreate
+    chmod +x run_x86.sh
+    ./run_x86.sh $ntp_servers
+    # sudo NTP_SERVERS="$ntp_servers" docker-compose up --force-recreate
 elif [ "$ARCH" == "aarch64" ]; then
     echo "Detected architecture: aarch64"
     sudo docker load -i docker-images/ntp_arm64.tar
-    sudo NTP_SERVERS="$ntp_servers" docker-compose -f docker-compose-arm64.yml up --force-recreate
+    chmod +x run_arm64.sh
+    ./run_arm64.sh $ntp_servers
+    # sudo NTP_SERVERS="$ntp_servers" docker-compose -f docker-compose-arm64.yml up --force-recreate
 else
     echo "Detected architecture: $ARCH"
     sudo docker load -i docker-images/ntp_arm64.tar
-    sudo NTP_SERVERS="$ntp_servers" docker-compose -f docker-compose-arm64.yml up --force-recreate
+    chmod +x run_arm64.sh
+    ./run_arm64.sh $ntp_servers
+    # sudo NTP_SERVERS="$ntp_servers" docker-compose -f docker-compose-arm64.yml up --force-recreate
 fi
