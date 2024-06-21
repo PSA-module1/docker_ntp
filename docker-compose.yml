@@ -2,8 +2,7 @@ version: '3.4'
 
 services:
   ntp:
-    build: .
-    image: tobylyu/ntp:latest
+    image: clothooo/docker-ntp:x86
     container_name: ntp
     restart: always
     ports:

@@ -1,1 +1,0 @@
-sudo dokcer-compose up -f dokcer-compose-arm64.yml up

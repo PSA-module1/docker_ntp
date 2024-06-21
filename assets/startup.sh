@@ -42,7 +42,8 @@ if [ -z "${NTP_SERVERS}" ]; then
   if [ "${last_digit}" -eq "0" ]; then
     NTP_SERVERS="127.127.1.1"
   else
-    NTP_SERVERS="192.168.1${HOSTNAME: -4: -2}.100"
+    # NTP_SERVERS="192.168.1${HOSTNAME: -4: -2}.100"
+    NTP_SERVERS="${DEFAULT_NTP}"
   fi
 fi
 
@@ -82,7 +83,7 @@ done
   echo "makestep 0.1 3"
   echo "rtcsync"
   echo
-  echo "allow 192.168"
+  echo "allow all"
 } >> ${CHRONY_CONF_FILE}
 
 

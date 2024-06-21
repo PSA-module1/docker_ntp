@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # grab global variables
-source vars
+source vars_arm64
 
 DOCKER=$(which docker)
 BUILD_DATE=$(date -u '+%Y-%m-%dT%H:%M:%S%z')

@@ -2,9 +2,6 @@ version: '3.4'
 
 services:
   ntp:
-    build:
-      context: .
-      dockerfile: Dockerfile.arm64
     image: clothooo/docker-ntp:arm64
     container_name: ntp
     restart: always
