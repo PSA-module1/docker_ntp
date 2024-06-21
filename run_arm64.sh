@@ -22,7 +22,7 @@ function start_container() {
     --tmpfs /var/lib/chrony:rw,mode=1750 \
     --cap-add SYS_TIME \
     -e NTP_SERVERS="${ntp_servers}" \
-    -e HOSTNAME=${HOSTNAME:-127.127.1.1} \
+    -e HOSTNAME="127.127.1.1" \
     -e LOG_LEVEL=0 \
     -p 123:123/udp \
     ${IMAGE_NAME}:arm64
